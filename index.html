@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Головна</title>
+    <link rel="icon" href="favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/bootstrap4-toggle.css">
+    <link rel="stylesheet" href="/css/gijgo.css"/>
+    <link rel="stylesheet" href="/css/slider.css"/>
+    <link rel="stylesheet" href="/css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="/css/work.css">
+    <link rel="stylesheet" href = "javascript:void(0);" id="dark-theme-link">
+    <link rel="stylesheet" href="/css/loaders.css">
+
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+</head>
+<body id="page-top">
+
+<form id="form-search-date-pag" hidden method="post" novalidate>
+    <input type="hidden" name="sorting_field_name" id="sorting_field_name-pag" value="date-write">
+    <input type="hidden" name="sorting-direction" id="sorting-direction-pag" value="А-Я">
+    <input type="hidden" name="quantity-per-page" id="quantity-per-page-pag" value="10">
+    <input type="hidden" name="page-number" id="page-number-pag" value="1">
+    <input type="hidden" name="prev-next" id="prev-next-pag" value="">
+    <div class="col-6 mt-3 d-block mx-auto">
+        <button type="submit" id="show-table-pag"></button>
+    </div>
+</form>
+
+<div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <div class="container-fluid mt-0 mt-md-3">
+                <div class="row mb-3">
+                    <div              class="col-0  col-md-1 col-lg-1 col-xl-4 text-lg-left text-center mb-1 mb-sm-3"><input type="checkbox" id="dark-theme-button" checked data-toggle="toggle" data-onstyle="dark"></div>
+                    <div id="config"  class="col-12 col-md-3 col-lg-3 col-xl-2 mb-3 mb-md-0"></div>
+                    <div id="network" class="col-12 col-md-3 col-lg-3 col-xl-2 mb-3 mb-md-0"></div>
+                    <div id="users"   class="col-12 col-md-3 col-lg-3 col-xl-2 mb-3 mb-md-0"></div>
+                    <form             class="col-12 col-md-2 col-lg-2 col-xl-2" action="/users/logout" method="post">
+                        <input type="hidden" name="logOut">
+                        <button type="submit" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">Вихід з системи
+                            <i class='ml-2 fas fa-reply'></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="row" id="header-info">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Файлів на сервері</div>
+                                        <div id="files_on_server" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Скачано за сьогодні</div>
+                                        <div id="files_on_server_today" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    </div>
+                                    <div class="col-auto"><i class="fas fa-cloud-download-alt fa-2x text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body chart">
+                                <div class="row no-gutters align-items-center">
+                                    <span id="processor_load" class="text-xs font-weight-bold text-info" style="position: absolute; top: 0; left: 5px;"></span>
+
+                                    <div class="col text-center" style="position: absolute; top: 0;">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Завантаженість процесора</div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class=""></div>
+                                            </div>
+                                        </div>
+
+                                        <div id="chartdiv1"></div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body chart">
+                                <div class="row no-gutters align-items-center">
+                                    <span id="dw_speed" class="text-xs font-weight-bold " style="position: absolute; top: 0; left: 5px;"></span>
+                                    <div class="col text-center" style="position: absolute; top: 0;">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Швидкість скачування</div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class=""></div>
+                                            </div>
+                                        </div>
+                                        <div id="chartdiv2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="car-info" class="col-12 col-md-8">
+                        <div class="card shadow mb-4">
+                            <div class="row no-gutters card-header py-2" style="display: flex; align-items: center; justify-content: space-between;">
+                                <h6 class="col-12 col-md-12 col-lg-3 m-0 mb-md-2 mb-lg-0 font-weight-bold text-primary text-center text-lg-left">Статистика завантаження</h6>
+                                <span class="col-12 col-md-9 col-lg-6 font-weight-bold text-primary text-center" style="display: flex; align-items: center; justify-content: center;">
+                                        <span class="text-center text-xl-right mr-2">всі автомобілі</span>
+                                        <label class="switch mb-0 text-center my-2 my-md-0">
+                                            <input type="checkbox" id="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <span class="text-center text-xl-left ml-2">тільки активні</span>
+                                </span>
+                                <form id='filter-car' class="col-12 col-md-3 col-lg-3">
+                                    <input type="text" name="filter" id="filter-car-search" class="form-control text-uppercase" maxlength="8" placeholder="AA0000AA"/>
+                                </form>
+                            </div>
+                            <div class="card-body bar mb-4 pt-4"></div>
+                        </div>
+                    </div>
+                    <div id="server-info" class="col-12 col-md-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Дані сервера</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-lg-4 text-center small">
+                                    <span class="mr-2 font-weight-bolder"><i class="fas fa-circle" style="color: red"></i> Занято <span id="full"></span>%</span>
+                                    <span class="mr-2 font-weight-bolder"><i class="fas fa-circle" style="color: green"></i> Вільно <span id="free"></span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Вибір періоду та авто:</h6>
+                            </div>
+                            <div class="card-body d-flex justify-content-center">
+                                <form id="form-search-date" autocomplete="off" method="post" novalidate>
+                                    <div class="form-group row">
+                                        <div class="col-12 col-md-4 mb-3 mb-md-0  text-center">
+                                            <label for="numberCar">Номер автомобіля</label>
+                                            <input id="numberCar" name="numberCar" type="text" autofocus autocomplete="off" class="form-control text-uppercase" placeholder="AA0000AA" required/>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3 mb-md-0  text-center">
+                                            <label for="startDate">Початкова дата запису</label>
+                                            <input id="startDate" name="startDate" type="text" class="form-control" placeholder="2020-07-07" required/>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3 mb-md-0  text-center">
+                                            <label for="endDate">Кінцева дата запису</label>
+                                            <input id="endDate" name="endDate" type="text" class="form-control" placeholder="2020-07-08" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                            <label for="slider-left" class="text-center d-block">Початковий час запису</label>
+                                            <input type="text" id='slider-left' class="js-range-slider"/>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                            <label for="slider-right" class="text-center d-block">Кінцевий час запису</label>
+                                            <input type="text" id='slider-right' class="js-range-slider"/>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="start-time" id="time-start" value="">
+                                    <input type="hidden" name="end-time" id="time-end" value="">
+                                    <input type="hidden" name="sorting_field_name" id="sorting_field_name" value="date-write">
+                                    <input type="hidden" name="sorting-direction" id="sorting-direction" value="А-Я">
+                                    <input type="hidden" name="quantity-per-page" id="quantity-per-page" value="10">
+                                    <input type="hidden" name="page-number" id="page-number" value="1">
+                                    <input type="hidden" name="filter" id="filter" value="">
+                                    <input type="hidden" name="prev-next" id="prev-next" value="">
+                                    <div class="row mt-3 d-flex align-items-center justify-content-around px-3">
+                                        <button type="submit" id="show-table" class="col-12 col-md-5 btn bg-secondary text-white btn-user btn-block bg-success w-75 mb-3 mb-md-0">Пошук<i class="ml-3 fas fa-search"></i></button>
+                                        <button type="submit" id="clear-all-filters" class="col-12 col-md-5 btn bg-secondary text-white btn-user btn-block bg-success mt-0 w-75">Очистити всі фільтри<i class="ml-3 fas fa-filter"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="videoModal" data-backdrop="static" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body p-0"></div>
+                        </div>
+                    </div>
+                </div>
+                <section class="row p-3 d-none" id="section-table">
+
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2 d-flex justify-content-center justify-content-sm-start">
+                        <div class="dataTables_length">
+                            <label class="text-center">кількість записів
+                                <select id="select-count-main" aria-controls="carTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-none d-md-block col-md-6 col-lg-8"></div>
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2" style="display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <form id="form-get-all-videos" class="pb-2 w-100">
+                            <input name="id" id="all-videos" type="text" hidden/>
+                            <button type="submit" id="get-videos" class="btn bg-secondary text-white btn-user btn-block py-1">Завантажити всі файли <img src="/img/network_img/download-from-cloud.png" class="ml-2" style="width: 30px;" alt="download-from-cloud"></button>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="mainTable" class="table table-striped table-hover table-bordered tablesorter" style="width:100%">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th style="cursor:pointer" class="text-center">#</th>
+                                <th style="cursor:pointer" data-sort="licence_n" class="text-center header sort-table">Номер автомобіля</th>
+                                <th style="cursor:pointer" data-sort="date-load" class="text-center header sort-table">Дата завантаження на сервер</th>
+                                <th style="cursor:pointer" data-sort="date-write" class="text-center header sort-table">Дата запису</th>
+                                <th style="cursor:pointer" data-sort="time-write" class="text-center header sort-table">Час запису</th>
+                                <th style="cursor:pointer" data-sort="size-file" class="text-center header sort-table">Розмір файла (MB)</th>
+                                <th style="cursor:pointer" class="text-center">Завантажити</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="pagination" class="row no-gutters my-3"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="loader">
+            <div class="lds-spinner" style="top: 1200px !important;">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <footer class="sticky-footer pt-3">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>&copy; Website 2020</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+<script src='/js/jquery-ui.min.js'></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap.popper.min.js"></script>
+<script src="/js/bootstrap4-toggle.js"></script>
+<script src="/js/gijgo.js"></script>
+<script src="/js/gijgo-lang.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<script src="/js/Chart.min.js"></script>
+<script src="/js/chart-area-demo.js"></script>
+<script src="/js/slider.js"></script>
+<script src="/js/work.js"></script>
+</body>
+</html>

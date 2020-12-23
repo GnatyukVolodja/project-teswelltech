@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Конфігуратор користувачів</title>
+    <link rel="icon" href="favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="/css/work.css">
+    <link rel="stylesheet" href="javascript:void(0);" id="dark-theme-link">
+    <link rel="stylesheet" href="/css/loaders.css">
+    <link rel="stylesheet" href="/css/google_icons.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+</head>
+<body id="page-top">
+
+<!--car-form-->
+<form id="form_users" hidden method="post" autocomplete="off">
+    <input type="hidden" name="quantity-per-page" id="user_quantity-per-page" value="10">
+    <input type="hidden" name="page-number" id="user_page-number" value="1">
+    <input type="hidden" name="filter" id="user_filter" value="">
+    <input type="hidden" name="sorting_field_name" id="user_sorting-field-name" value="first-name">
+    <input type="hidden" name="sorting-direction" id="user_sorting-direction-user" value="А-Я">
+    <button type="submit" id="submit-form-user"></button>
+</form>
+
+<div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column" style="height: 100% !important; position: absolute;">
+        <div id="content">
+            <div class="container-fluid mt-3">
+                <div class="row mb-4">
+                    <div class="col-0 col-sm-0 col-md-3 col-lg-6"></div>
+                    <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+                        <a href="/" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">На головну<i class="ml-2 fas fa-reply"></i></a></div>
+                    <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-md-0">
+                        <a href="/config" id="click_link" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">Конфігуратор авто<i class="ml-2 fas fa-cogs"></i></a>
+                    </div>
+                    <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-md-0">
+                        <a href="/network" id="network_config" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">Конфігуратор мережі<i class="ml-2 fas fa-network-wired"></i></a>
+                    </div>
+                </div>
+                <section class="row">
+                    <div class="container p-0">
+                        <div class="tabs">
+                            <button class="tab text-center active" type="button" id="car_tabs" data-content="car_tab">
+                                Конфігуратор користувачів<i class="pl-0 pl-md-4 fas fa-users"></i></button>
+
+                        </div>
+                        <div id="user_tab" class="tab_content">
+                            <div class="row">
+                                <div class="col-12 col-md-3 col-lg-2 d-flex justify-content-center justify-content-md-start px-0">
+                                    <div class="dataTables_length w-100">
+                                        <label class="text-center w-100 my-0">кількість записів
+                                            <select id="select-count-user" aria-controls="carTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4 mr-auto ml-auto mb-2 mb-md-2 mt-3 px-0"
+                                    style="display: flex; align-items: center; justify-content: center;">
+                                    <button type="button" data-toggle="modal" data-target="#addUserModal"
+                                        class="btn bg-secondary text-white btn-user btn-block bg-success">Додати
+                                        користувача<i class="ml-3 fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-3 col-lg-2 px-0"
+                                    style="display: flex; align-items: flex-end; justify-content: flex-end;">
+                                    <input class="form-control mb-2 text-uppercase" autofocus id="searchInput_user"
+                                        autocomplete="off" type="text"
+                                        placeholder="Пошук">
+                                </div>
+
+                                <div id='add_change_user_ok' class='bg-success text-white mx-auto w-25 ' style="height: 55px; position: absolute; left: 0;right: 0;"><span style='margin: 15px; position:absolute'>Нового користувача добавлено</span></div>
+                                <div id='add_change_user_err' class='bg-danger text-white mx-auto w-25 ' style="height: 55px; position: absolute; left: 0;right: 0;"><span style='margin: 15px; position:absolute'>Такий користувач вже існує, перевірте введені дані</span></div>
+
+                                <div class="table-responsive">
+                                    <table id="userTable"
+                                        class="table table-striped table-hover table-bordered tablesorter"
+                                        style="width:100%">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th style="cursor:pointer" class="text-center">#</th>
+                                            <th style="cursor:pointer" data-sort="first-name"
+                                                class="sort-car text-center header sort-table-user">Прізвище
+                                            </th>
+                                            <th style="cursor:pointer" data-sort="last-name"
+                                                class="sort-car text-center header sort-table-user">Імя
+                                            </th>
+                                            <th style="cursor:pointer" data-sort="phone-user"
+                                                class="sort-car text-center header sort-table-user">Телефон
+                                            </th>
+
+                                            <th style="cursor:pointer" data-sort="login-user"
+                                                class="sort-car text-center header sort-table-user">Логін
+                                            </th>
+                                            <th style="cursor:pointer" class="text-center">Права користувачів
+
+                                            </th>
+                                            <th style="cursor:pointer"
+                                                class="text-center">Змінити / Видалити</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="pagination_user" class="row no-gutters my-3"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="loader">
+            <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <footer class="sticky-footer pt-3">
+            <div class="container my-auto">
+                <div class="copyright text-center mt-4">
+                    <span>&copy; Website 2020</span>
+                </div>
+            </div>
+        </footer>
+
+        <!--        ========================================================================= CAR ========================================================-->
+
+        <!-- додати користувача-->
+        <div class="modal" id="addUserModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="user_add" autocomplete="off" method="post">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">додати користувача</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group m-0">
+
+                                <div class="row mb-2">
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="add_last_name">Прізвище</label>
+                                        <input type="text" name="last_name" id="add_last_name"
+                                            class="form-control text-uppercase" placeholder="Васьків"
+                                            autocomplete="off" required/>
+                                    </div>
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="add_first_name">Імя</label>
+                                        <input type="text" name="first_name" id="add_first_name"
+                                            class="form-control text-uppercase" placeholder="Петро"
+                                            autocomplete="off" required/>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="phone-user">Телефон</label>
+                                        <input type="text" name="tel" id="phone-user"
+                                            class="form-control text-uppercase" maxlength="13"
+                                            placeholder="+380501234567" autocomplete="off" required/>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="login-user">Логін</label>
+                                        <input type="text" name="username" id="login-user"
+                                            class="form-control text-uppercase" maxlength="13" placeholder="login"
+                                            autocomplete="off" required/>
+                                        <!--                                </div>-->
+
+                                        <input type="hidden" name="id" value="0"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="submit-btn" class="btn btn-success">Підтвердити</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- змінити користувача-->
+        <!--    <div class="modal" id="carModal">-->
+        <div class="modal" id="changeUserModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="user_change" autocomplete="off" method="post">
+                        <div class="modal-header">
+                            <h4 class="modal-title">змінити користувача</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group m-0">
+
+                                <div class="row mb-2">
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="change_last_name">Прізвище</label>
+                                        <input type="text" name="last_name" id="change_last_name"
+                                            class="form-control text-uppercase" placeholder="Васьків"
+                                            autocomplete="off" required/>
+                                    </div>
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="change_first_name">Імя</label>
+                                        <input type="text" name="first_name" id="change_first_name"
+                                            class="form-control text-uppercase" placeholder="Петро"
+                                            autocomplete="off" required/>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-2">
+
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="change-phone-user">Телефон</label>
+                                        <input type="text" name="tel" id="change-phone-user"
+                                            class="form-control text-uppercase" maxlength="13"
+                                            placeholder="+380501234567" autocomplete="off" required/>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 text-center">
+                                        <label for="change-login-user">Логін</label>
+                                        <input type="text" name="username" id="change-login-user"
+                                            class="form-control text-uppercase" maxlength="13" placeholder="login"
+                                            autocomplete="off" required/>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="id" id="user_id">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success close_all_modal_user">Підтвердити</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.popper.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<script src="/js/users.js"></script>
+<script>
+
+</script>
+</body>
+</html>

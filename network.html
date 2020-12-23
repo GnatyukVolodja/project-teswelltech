@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Конфігуратор мережі</title>
+    <link rel="icon" href="favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="/css/loaders.css">
+    <link rel="stylesheet" href="/css/work.css">
+    <link rel="stylesheet" href="/css/network.css">
+    <link rel="stylesheet" href = "javascript:void(0);" id="dark-theme-link">
+
+</head>
+<body class="network-bg-color">
+
+<div id="content">
+    <div class="container-fluid mt-3">
+        <div class="row mb-4">
+            <div class="col-0 col-sm-0 col-md-3 col-lg-6"></div>
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2"><a href="/" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">На головну<i class="ml-2 fas fa-reply"></i></a></div>
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-md-0"><a href="/config" id="click_link" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">Конфігуратор авто<i class='ml-2 fas fa-cogs'></i></a></div>
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-md-0"><a href="/users" id="network_config" class="btn w-100 hover-bg" style="border-color: #858796!important; color: #858796!important;">Конфігуратор користувачів<i class='ml-2 fas fa-users'></i></a></div>
+        </div>
+    </div>
+
+    <div class="network">
+
+        <div class="top-block align-row">
+            <div class="el-top align-row">
+                <span style="position:absolute; top: 25px;">Internet</span>
+                <div id="internet" class="inner-el-top align-column">
+                    <img src="/img/network_img/network-connection-color-grey.png" alt="network-connection">
+                </div>
+
+
+                <ul id="internet-list" class="internet-list w-75 m-0 py-4 px-3">
+                    <li class="clearfix">
+                        <span class="close-icon-1"><img src="/img/network_img/cancel.png" style="width: 25px; cursor: pointer" alt="cancel"></span>
+                    </li>
+                    <li>
+                        <form id="form-internet-on" class="d-block" method="post" novalidate>
+                            <input type="hidden" name="interface_power_onoff" id="internet-connected">
+                            <input type="hidden" name="network_element" id="network_element-on-internet">
+                            <button type="submit" class="btn btn-secondary w-100 my-1">Підключити</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form id="form-internet-off" class="d-none" method="post" novalidate>
+                            <input type="hidden" name="interface_power_onoff" id="internet-disconnected">
+                            <input type="hidden" name="network_element" id="network_element-off-internet">
+                            <button type="submit" class="btn btn-secondary w-100 my-1">Відключити</button>
+                        </form>
+                    </li>
+                </ul>
+                <hr id="hr_1">
+            </div>
+            <div class="el-top align-row">
+                <span style="position:absolute; top: 25px;">Local network</span>
+                <div id="local-network" class="inner-el-top align-column">
+                    <img src="/img/network_img/local-network-color-grey.png" alt="local-network">
+                </div>
+
+
+                <ul id="local-network-list" class="local-network-list w-75 m-0 py-4 px-3">
+                    <li class="clearfix">
+                        <span class="close-icon-1"><img src="/img/network_img/cancel.png" style="width: 25px; cursor: pointer" alt="cancel"></span>
+                    </li>
+                    <li>
+                        <form id="form-local-network-on" class="d-block" method="post" novalidate>
+                            <input type="hidden" name="interface_power_onoff" id="local-network-connected">
+                            <input type="hidden" name="network_element" id="network_element-on-local-network">
+                            <button type="submit" class="btn btn-secondary w-100 my-1">Підключити</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form id="form-local-network-off" class="d-none" method="post" novalidate>
+                            <input type="hidden" name="interface_power_onoff" id="local-network-disconnected">
+                            <input type="hidden" name="network_element" id="network_element-off-local-network">
+                            <button type="submit" class="btn btn-secondary w-100 my-1">Відключити</button>
+                        </form>
+                    </li>
+                </ul>
+
+
+                <hr id="hr_2" class="grey">
+            </div>
+            <div class="el-top align-row">
+                <span style="position:absolute; top: 25px;">DVR network</span>
+                <div id="dvr-network" class="inner-el-top align-column">
+                    <img src="/img/network_img/dvr-network-color-grey.png" alt="dvr-network">
+                </div>
+
+                <hr id="hr_3">
+            </div>
+            <div class="el-top align-row">
+                <span style="position:absolute; top: 25px;">DVR server</span>
+                <div id="dvr-server" class="inner-el-top align-column">
+                    <img src="/img/network_img/server-color-grey.png" alt="server">
+                </div>
+
+                <hr id="hr_4">
+            </div>
+        </div>
+
+        <div class="middle-block align-column">
+            <div id="ethernet-top" class="align-row">
+                <img src="/img/network_img/ethernet-off.png" style="margin: 0 109px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin: 0 109px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin: 0 109px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin: 0 109px;" alt="ethernet-off">
+            </div>
+            <span class="text-center" style="position: absolute; top: 18px;">DVR Router</span>
+            <div id="ethernet-bottom" class="align-row" style="margin-left: 18px;">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+                <img src="/img/network_img/ethernet-off.png" style="margin-left: 10px;" alt="ethernet-off">
+            </div>
+        </div>
+
+        <div class="bottom-block">
+            <div class="inner-el-bottom-1 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-1">1</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi1" data-reg_count="0" data-reg_online="0" data-ssid="sector01"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_5">
+            <div class="inner-el-bottom-2 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-2">2</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi2" data-reg_count="0" data-reg_online="0" data-ssid="sector02"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_6">
+            <div class="inner-el-bottom-3 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-3">3</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi3" data-reg_count="0" data-reg_online="0" data-ssid="sector03"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_7">
+            <div class="inner-el-bottom-4 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-4">4</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi4" data-reg_count="0" data-reg_online="0" data-ssid="sector04"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_8">
+            <div class="inner-el-bottom-5 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-5">5</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi5" data-reg_count="0" data-reg_online="0" data-ssid="sector05"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_9">
+            <div class="inner-el-bottom-6 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-6">6</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi6" data-reg_count="0" data-reg_online="0" data-ssid="sector06"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_10">
+            <div class="inner-el-bottom-7 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-7">7</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi7" data-reg_count="0" data-reg_online="0" data-ssid="sector07"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_11">
+            <div class="inner-el-bottom-8 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-8">8</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi8" data-reg_count="0" data-reg_online="0" data-ssid="sector08"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_12">
+            <div class="inner-el-bottom-9 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-9">9</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi9" data-reg_count="0" data-reg_online="0" data-ssid="sector09"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_13">
+            <div class="inner-el-bottom-10 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-10">10</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi10" data-reg_count="0" data-reg_online="0" data-ssid="sector10"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_14">
+            <div class="inner-el-bottom-11 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-11">11</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi11" data-reg_count="0" data-reg_online="0" data-ssid="sector11"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_15">
+            <div class="inner-el-bottom-12 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-12">12</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi12" data-reg_count="0" data-reg_online="0" data-ssid="sector12"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_16">
+            <div class="inner-el-bottom-13 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-13">13</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi13" data-reg_count="0" data-reg_online="0" data-ssid="sector13"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_17">
+            <div class="inner-el-bottom-14 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-14">14</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi14" data-reg_count="0" data-reg_online="0" data-ssid="sector14"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_18">
+            <div class="inner-el-bottom-15 align-column text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Інтерфейс відсутній">
+                <span class="number-15">15</span><img src="/img/network_img/wi-fi-search.png" alt="local-network" data-freq="2412" data-network-el="wifi15" data-reg_count="0" data-reg_online="0" data-ssid="sector15"><span style="color: #f8f9fc">0 авто<br>0 в мережі</span>
+            </div>
+            <hr id="hr_19">
+        </div>
+
+
+    </div>
+
+    <div class="modal" id="network-modal-on">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="network-form" action="/network/set_status" autocomplete="off" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Настройки мережі - <span id="ssid"></span></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <p class="col-6">К-сть авто даної мережі: <span id="reg_count"></span></p>
+                            <p class="col-6">В мережі онлайн: <span id="reg_online"></span></p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="new-name-ssid" class="col-sm-5 col-form-label">Змінити назву мережі</label>
+                            <div class="col-sm-7">
+                                <input type="text" name="name-ssid" id="new-name-ssid" class="form-control" maxlength="8" autocomplete="off" required/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="new-freq" class="col-sm-5 col-form-label">Змінити (задати) частоту</label>
+                            <div class="col-sm-7">
+                                <select name="new-freq" id="new-freq" class="form-control" required>
+                                    <option value="2412">2412</option>
+                                    <option value="2417">2417</option>
+                                    <option value="2422">2422</option>
+                                    <option value="2427">2427</option>
+                                    <option value="2432">2432</option>
+                                    <option value="2437">2437</option>
+                                    <option value="2442">2442</option>
+                                    <option value="2447">2447</option>
+                                    <option value="2452">2452</option>
+                                    <option value="2457">2457</option>
+                                    <option value="2462">2462</option>
+                                    <option value="2467">2467</option>
+                                    <option value="2472">2472</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-ssid" class="col-sm-5 col-form-label">Встановити пароль</label>
+                            <div class="col-sm-7">
+                                <input type="text" name="password" id="password-ssid" maxlength="8" class="form-control" autocomplete="off" required/>
+                            </div>
+                        </div>
+                        <input type="hidden" name="interface_power_onoff" value="1">
+                        <input type="hidden" name="network_element" id="network_element-wi-fi">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success close_all_modal_reg">Підключити мережу</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="network-modal-off">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="network-form-off" action="/network/set_status" autocomplete="off" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Відключити мережу - <span id="ssid-off"></span></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" name="interface_power_onoff" value="0">
+                        <input type="hidden" name="network_element" id="network_element-wi-fi-off">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success close_all_modal_reg">Відключити мережу</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Відмінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="loader">
+        <div class="lds-spinner" style="top: 400px !important;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.popper.min.js"></script>
+<script src="/js/network.js"></script>
+</body>
+</html>

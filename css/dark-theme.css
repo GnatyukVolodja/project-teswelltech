@@ -1,0 +1,101 @@
+#wrapper #content-wrapper {
+    background: #152036;
+    color: white !important;
+}
+
+.card, .card-header {
+    background: #1b2a47;
+    border: none;
+}
+
+.form-control {
+    background: #1b2a47 !important;
+    border: none !important;
+    border-bottom: 1px solid white !important;
+    color: white !important;
+}
+
+#files_on_server, #files_on_server_today {
+    color: white !important;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #152036;
+    color: white;
+}
+
+#mainTable {
+    background: #1b2a47;
+}
+
+#mainTable .thead-dark th {
+    border: 1px solid #152036;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1b2a47;
+}
+
+.gj-modal tr:nth-child(even) {
+    background-color: #1b2a47;
+}
+
+.gj-modal table {
+    border: 1px solid transparent !important;
+}
+
+div [role="body"] {
+    background: #1b2a47;
+    border: none;
+}
+
+.gj-picker {
+    background-color: transparent !important;
+}
+
+.toggle.btn {
+    min-width: 130px !important;
+}
+
+.toggle-on.btn, .toggle-off.btn {
+    padding-top: 2px;
+}
+
+#car_tab, #reg_tab, #user_tab {
+    background: #1b2a47;
+}
+
+.tabs button.active {
+    background: #1b2a47;
+    color: white;
+}
+
+.modal-content, .modal-header, .modal-body, .modal-footer {
+    background: #1b2a47;
+    border: 1px solid #1b2a47;
+    color: white;
+}
+
+.network {
+    background: #1b2a47;
+}
+
+.network-bg-color {
+    background-color: #1b2a47;
+}
+
+.local-network-list, .internet-list {
+    border: 2px solid transparent;
+    background: #1b2a47;
+}
+
+.btn-light {
+    color: #3a3b45;
+    background-color: #ffffff;
+    border-color: #cccccd;
+}
+
+#carTable th, #regTable th, #userTable th {
+    border-color: #152036 !important;
+    /*border: 1px solid #152036;*/
+}
